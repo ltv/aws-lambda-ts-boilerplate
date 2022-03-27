@@ -1,0 +1,5 @@
+---
+baseAuthorizer:
+  handler: functions/auth/index.baseAuthorizer
+  layers:
+    - { Ref: CoreLambdaLayer }

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "/opt/core/*": [
+        "lambda/core/nodejs/lib/*"
+      ]
+    },
+    "typeRoots": ["lambda/core/nodejs/@types"]
+  },
+  "include": [
+    "functions/**/*",
+    "lambda/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".webpack",
+    ".serverless"
+  ]
+}

@@ -1,0 +1,9 @@
+---
+allUsers:
+  handler: functions/users/index.allUsers
+  layers:
+    - { Ref: CoreLambdaLayer }
+  events:
+    - httpApi:
+        path: /users
+        method: get

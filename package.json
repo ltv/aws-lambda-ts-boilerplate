@@ -1,0 +1,61 @@
+{
+  "name": "aws-lambda-boilerplate",
+  "version": "1.0.0",
+  "description": "The AWS Lambda Functions Boilerplate",
+  "main": "index.js",
+  "repository": "git@github.com:ltv/aws-lambda-boilerplate.git",
+  "author": "Luc <luc@ltv.dev>",
+  "private": "true",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=14.0"
+  },
+  "workspaces": {
+    "packages": [
+      "functions/*",
+      "lambda/core/nodejs"
+    ]
+  },
+  "scripts": {
+    "init:cz": "commitizen init cz-conventional-changelog --save-dev --save-exact --force",
+    "ci": "yarn install --immutable --immutable-cache --check-cache",
+    "postinstall": "husky install",
+    "serve": "serverless offline --config serverless.offline.yaml start",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "lint": "echo lint",
+    "prettier:write": "echo prettier:write"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@types/aws-lambda": "^8.10.93",
+    "aws-lambda": "^1.0.7",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.14.21",
+    "esbuild-node-externals": "^1.4.1",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.4",
+    "lodash": "^4.17.21",
+    "semver": "^7.3.5",
+    "serverless": "^3.2.0",
+    "serverless-dotenv-plugin": "^3.12.2",
+    "serverless-esbuild": "^1.26.1",
+    "serverless-offline": "^8.4.0",
+    "serverless-prune-plugin": "^2.0.1",
+    "standard-version": "^9.3.2",
+    "typescript": "^4.6.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "yarn lint",
+      "yarn prettier:write"
+    ]
+  }
+}
