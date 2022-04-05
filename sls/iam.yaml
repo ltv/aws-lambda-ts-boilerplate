@@ -1,0 +1,22 @@
+---
+  role:
+    statements:
+      - Effect: Allow
+        Action:
+          - 'dynamodb:*'
+          - 'lambda:ListFunctions'
+          - 'lambda:ListVersionsByFunction'
+          - 'lambda:ListAliases'
+          - 'lambda:DeleteFunction'
+          - 'lambda:ListLayerVersions'
+          - 'lambda:DeleteLayerVersion'
+          - 'lambda:InvokeFunction'
+          - 'xray:PutTraceSegments'
+          - 'xray:PutTelemetryRecords'
+          - 'logs:CreateLogGroup'
+          - 'logs:CreateLogStream'
+          - 'logs:PutLogEvents'
+          - 's3:*'
+          - 'sqs:*'
+        Resource:
+          - '*'

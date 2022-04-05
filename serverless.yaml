@@ -1,0 +1,55 @@
+service: alb
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 128 # optional, in MB, default is 1024
+  timeout: 15 # optional, in seconds, default is 6
+  stage: ${opt:stage, 'production'}
+  region: ${opt:region, 'ap-northeast-1'}
+  versionFunctions: true
+  tracing:
+    apiGateway: true
+    lambda: true
+  environment:
+    NODE_ENV: production
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    SERVICE: ${self:service}
+    SENTRY_DSN: ${env:SENTRY_DSN}
+  deploymentPrefix: ${self:service}
+  httpApi: ${file(./sls/http-api.yaml)}
+  iam: ${file(./sls/iam.yaml)}
+
+custom:
+  stage: ${self:provider.stage}
+  region: ${self:provider.region}
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - Accept-Language
+  esbuild:
+    plugins: ./plugins/esbuild.js
+    packager: yarn
+    nativeZip: false
+    bundle: true
+    minify: false
+    sourcemap: false
+    keepNames: true
+    target: esnext
+  prune:
+    automatic: true
+    number: 3
+
+package:
+  individually: true
+
+plugins:
+  - serverless-esbuild
+  - serverless-prune-plugin
+
+layers: ${file(./sls/layers.yaml)}
+functions: ${file(./sls/functions.yaml)}
+# resources: ${file(./sls/resources.yaml)}

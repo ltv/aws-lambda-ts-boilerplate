@@ -1,0 +1,16 @@
+---
+  cors:
+    allowedOrigins: 
+      - '*'
+    allowedHeaders:
+      - Content-Type
+      - Authorization
+    allowedMethods:
+      - '*'
+    allowCredentials: false
+    maxAge: 6000
+  shouldStartNameWithService: true
+  authorizers:
+    baseAuthorizer:
+      type: request
+      functionName: baseAuthorizer

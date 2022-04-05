@@ -1,4 +1,4 @@
-service: atm
+service: alb
 
 frameworkVersion: '3'
 

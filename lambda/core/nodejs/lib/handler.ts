@@ -11,7 +11,8 @@ import meta from './middleware/meta'
 import normalizeEventParams from './middleware/normalize-event-params'
 import validator from './middleware/validator'
 import { Response } from './response'
-
+import * as Sentry from '@sentry/serverless'
+import env from '@ltv/env'
 
 export interface CreateHandlerOptions<P = unknown> {
   name: string
@@ -38,13 +39,18 @@ const respSerializerMiddleware = () =>
     default: 'application/json',
   })
 
+Sentry.AWSLambda.init({
+  dsn: env.string('SENTRY_DSN'),
+  tracesSampleRate: 1.0,
+});
+
 /**
  *
  * @param CreateHandlerOptions
  * @returns
  */
 export const createHandler = <P = unknown>(options: CreateHandlerOptions<P>) => {
-  const mHandler = middy(options.handler)
+  const mHandler = middy(Sentry.AWSLambda.wrapHandler(options.handler))
     .use(warmup())
     .use({ before: ({ context }) => { context.res = res; } })
     .use(httpEventNormalizer())

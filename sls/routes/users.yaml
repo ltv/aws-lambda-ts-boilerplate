@@ -7,3 +7,7 @@ allUsers:
     - httpApi:
         path: /users
         method: get
+  package:
+    patterns:
+      - '!functions/**/node_modules/**/*'
+      - 'functions/users/node_modules/**/*'

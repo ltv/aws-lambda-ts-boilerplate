@@ -1,0 +1,2 @@
+---
+  - ${file(./sls/dynamodb/db.yaml)}

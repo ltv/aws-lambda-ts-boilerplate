@@ -1,0 +1,3 @@
+---
+  - ${file(./sls/functions/authorizer.yaml)}
+  - ${file(./sls/routes/users.yaml)}
